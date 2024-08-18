@@ -1,14 +1,29 @@
 export const erroresFirebase = (code) => {
     console.log(code);
     if (code === "auth/weak-password") {
-        return "Password debe tener al menos 6 caracteres";
+        return {
+            code: "password",
+            message: "La contraseña debe tener al menos 6 caracteres",
+        };
     } else if (code === "auth/email-already-in-use") {
-        return "Correo ya existe";
+        return {
+            code: "email",
+            message: "Correo electrónico ya está en uso",
+        };
     } else if (code === "auth/invalid-credential") {
-        return "Credenciales inválidas";
+        return {
+            code: "email",
+            message: "Correo electrónico o contraseña incorrectos",
+        };
     } else if (code === "auth/invalid-email") {
-        return "Correo inválido";
+        return {
+            code: "email",
+            message: "Correo electrónico no válido",
+        };
     } else {
-        return "Ocurrió un error en el server";
+        return {
+            code: "general",
+            message: "Error desconocido",
+        };
     }
 };
