@@ -1,12 +1,17 @@
+import { useContext } from "react";
 import { Routes, Route } from "react-router-dom";
+
+import { UserContext } from "./context/UserProvider";
+
 import Login from "./routes/Login";
 import Home from "./routes/Home";
-import Navbar from "./components/Navbar";
-import RequireAuth from "./components/RequireAuth";
 import Register from "./routes/Register";
-import { useContext } from "react";
-import { UserContext } from "./context/UserProvider";
-import LayoutContainerForm from "./components/LayoutContainerForm";
+import Perfil from "./routes/Perfil";
+
+import Navbar from "./components/Navbar";
+import LayoutRequireAuth from "./components/layouts/LayoutRequireAuth";
+import LayoutContainerForm from "./components/layouts/LayoutContainerForm";
+import NotFound from "./routes/NotFound";
 
 const App = () => {
     const { user } = useContext(UserContext);
@@ -17,17 +22,16 @@ const App = () => {
 
     return (
         <>
-            <h1>App</h1>
             <Navbar></Navbar>
             <Routes>
                 <Route
                     path="/"
-                    element={
-                        <RequireAuth>
-                            <Home></Home>
-                        </RequireAuth>
-                    }
-                ></Route>
+                    element={<LayoutRequireAuth></LayoutRequireAuth>}
+                >
+                    <Route index element={<Home></Home>}></Route>
+                    <Route path="/perfil" element={<Perfil></Perfil>}></Route>
+                </Route>
+
                 <Route
                     path="/"
                     element={<LayoutContainerForm></LayoutContainerForm>}
@@ -38,6 +42,7 @@ const App = () => {
                         element={<Register></Register>}
                     ></Route>
                 </Route>
+                <Route path="*" element={<NotFound></NotFound>}></Route>
             </Routes>
         </>
     );
