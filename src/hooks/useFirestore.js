@@ -4,6 +4,7 @@ import {
     collection,
     deleteDoc,
     doc,
+    getDoc,
     getDocs,
     query,
     setDoc,
@@ -92,7 +93,27 @@ const useFirestore = () => {
         }
     };
 
-    return { data, error, loading, getData, addData, deleteData, updateData };
+    const searchData = async (nanoId) => {
+        try {
+            const docRef = doc(db, "urls", nanoId);
+            const docSnap = await getDoc(docRef);
+            return docSnap;
+        } catch (error) {
+            console.log(error);
+            setError(error.message);
+        }
+    };
+
+    return {
+        data,
+        error,
+        loading,
+        getData,
+        addData,
+        deleteData,
+        updateData,
+        searchData,
+    };
 };
 
 export default useFirestore;

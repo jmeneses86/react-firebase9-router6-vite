@@ -12,6 +12,7 @@ import Navbar from "./components/Navbar";
 import LayoutRequireAuth from "./components/layouts/LayoutRequireAuth";
 import LayoutContainerForm from "./components/layouts/LayoutContainerForm";
 import NotFound from "./routes/NotFound";
+import LayoutRedirect from "./components/layouts/LayoutRedirect";
 
 const App = () => {
     const { user } = useContext(UserContext);
@@ -42,7 +43,13 @@ const App = () => {
                         element={<Register></Register>}
                     ></Route>
                 </Route>
-                <Route path="*" element={<NotFound></NotFound>}></Route>
+
+                <Route
+                    path="/:nanoId"
+                    element={<LayoutRedirect></LayoutRedirect>}
+                >
+                    <Route index element={<NotFound></NotFound>}></Route>
+                </Route>
             </Routes>
         </>
     );

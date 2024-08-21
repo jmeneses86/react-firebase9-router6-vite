@@ -3,7 +3,7 @@ const FormError = ({ errors }) => {
         <>
             {errors && (
                 <p className="mt-2 text-sm text-red-600 dark:text-red-500">
-                    <span class="font-medium">Oops!</span> {errors.message}
+                    <span className="font-medium">Oops!</span> {errors.message}
                 </p>
             )}
         </>
